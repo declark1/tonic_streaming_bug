@@ -1,0 +1,98 @@
+➜  tonic_streaming_bug git:(master) ✗ RUST_LOG=trace target/debug/client
+2024-06-28T16:17:43.900061Z TRACE tonic::transport::service::reconnect: poll_ready; idle
+2024-06-28T16:17:43.900238Z TRACE tonic::transport::service::reconnect: poll_ready; connecting
+2024-06-28T16:17:43.900343Z TRACE hyper::client::connect::http: Http::connect; scheme=Some("http"), host=Some("[::1]"), port=Some(Port(50051))
+2024-06-28T16:17:43.901313Z DEBUG hyper::client::connect::http: connecting to [::1]:50051
+2024-06-28T16:17:43.901536Z TRACE tonic::transport::service::reconnect: poll_ready; not ready
+2024-06-28T16:17:43.901827Z TRACE tonic::transport::service::reconnect: poll_ready; connecting
+2024-06-28T16:17:43.901873Z DEBUG hyper::client::connect::http: connected to [::1]:50051
+2024-06-28T16:17:43.902122Z TRACE hyper::client::conn: client handshake Http2
+2024-06-28T16:17:43.902437Z DEBUG h2::client: binding client connection
+2024-06-28T16:17:43.902691Z DEBUG h2::client: client connection bound
+2024-06-28T16:17:43.903190Z DEBUG FramedWrite::buffer{frame=Settings { flags: (0x0), enable_push: 0, initial_window_size: 2097152, max_frame_size: 16384 }}: h2::codec::framed_write: send frame=Settings { flags: (0x0), enable_push: 0, initial_window_size: 2097152, max_frame_size: 16384 }
+2024-06-28T16:17:43.903225Z TRACE FramedWrite::buffer{frame=Settings { flags: (0x0), enable_push: 0, initial_window_size: 2097152, max_frame_size: 16384 }}: h2::frame::settings: encoding SETTINGS; len=18
+2024-06-28T16:17:43.903250Z TRACE FramedWrite::buffer{frame=Settings { flags: (0x0), enable_push: 0, initial_window_size: 2097152, max_frame_size: 16384 }}: h2::frame::settings: encoding setting; val=EnablePush(0)
+2024-06-28T16:17:43.903269Z TRACE FramedWrite::buffer{frame=Settings { flags: (0x0), enable_push: 0, initial_window_size: 2097152, max_frame_size: 16384 }}: h2::frame::settings: encoding setting; val=InitialWindowSize(2097152)
+2024-06-28T16:17:43.903286Z TRACE FramedWrite::buffer{frame=Settings { flags: (0x0), enable_push: 0, initial_window_size: 2097152, max_frame_size: 16384 }}: h2::frame::settings: encoding setting; val=MaxFrameSize(16384)
+2024-06-28T16:17:43.903323Z TRACE FramedWrite::buffer{frame=Settings { flags: (0x0), enable_push: 0, initial_window_size: 2097152, max_frame_size: 16384 }}: h2::codec::framed_write: encoded settings rem=27
+2024-06-28T16:17:43.904274Z TRACE h2::proto::streams::flow_control: inc_window; sz=65535; old=0; new=65535
+2024-06-28T16:17:43.904328Z TRACE h2::proto::streams::flow_control: inc_window; sz=65535; old=0; new=65535
+2024-06-28T16:17:43.904343Z TRACE h2::proto::streams::prioritize: Prioritize::new; flow=FlowControl { window_size: Window(65535), available: Window(65535) }
+2024-06-28T16:17:43.904492Z TRACE h2::proto::streams::recv: set_target_connection_window; target=5242880; available=65535, reserved=0
+2024-06-28T16:17:43.904550Z TRACE tonic::transport::service::reconnect: poll_ready; connected
+2024-06-28T16:17:43.904566Z TRACE tonic::transport::service::reconnect: poll_ready; not ready
+2024-06-28T16:17:43.904680Z TRACE tonic::transport::service::reconnect: poll_ready; connected
+2024-06-28T16:17:43.904701Z TRACE tonic::transport::service::reconnect: poll_ready; ready
+2024-06-28T16:17:43.904683Z TRACE Connection{peer=Client}:poll: h2::proto::connection: connection.state=Open
+2024-06-28T16:17:43.904777Z TRACE tower::buffer::worker: worker polling for next message
+2024-06-28T16:17:43.904782Z TRACE Connection{peer=Client}:poll:FramedRead::poll_next: h2::codec::framed_read: poll
+2024-06-28T16:17:43.904854Z TRACE Connection{peer=Client}:poll:FramedRead::poll_next: h2::codec::framed_read: read.bytes=39
+2024-06-28T16:17:43.904873Z TRACE tower::buffer::service: sending request to buffer worker
+2024-06-28T16:17:43.904910Z TRACE tower::buffer::worker: worker polling for next message
+2024-06-28T16:17:43.904924Z TRACE tower::buffer::worker: processing new request
+2024-06-28T16:17:43.904939Z TRACE tower::buffer::worker: resumed=false worker received request; waiting for service readiness
+2024-06-28T16:17:43.904959Z TRACE tonic::transport::service::reconnect: poll_ready; connected
+2024-06-28T16:17:43.904969Z TRACE tonic::transport::service::reconnect: poll_ready; ready
+2024-06-28T16:17:43.904981Z DEBUG tower::buffer::worker: service.ready=true processing request
+2024-06-28T16:17:43.904998Z TRACE tonic::transport::service::reconnect: Reconnect::call
+2024-06-28T16:17:43.905017Z TRACE tower::buffer::worker: returning response future
+2024-06-28T16:17:43.905033Z TRACE tower::buffer::worker: worker polling for next message
+2024-06-28T16:17:43.905059Z TRACE h2::proto::streams::flow_control: inc_window; sz=2097152; old=0; new=2097152
+2024-06-28T16:17:43.905070Z TRACE h2::proto::streams::flow_control: inc_window; sz=65535; old=0; new=65535
+2024-06-28T16:17:43.905119Z TRACE h2::proto::streams::send: send_headers; frame=Headers { stream_id: StreamId(1), flags: (0x4: END_HEADERS) }; init_window=65535
+2024-06-28T16:17:43.905140Z TRACE Connection{peer=Client}:poll:FramedRead::poll_next:FramedRead::decode_frame{offset=39}: h2::codec::framed_read: decoding frame from 39B
+2024-06-28T16:17:43.905155Z TRACE h2::proto::streams::store: Queue::push_back
+2024-06-28T16:17:43.905178Z TRACE Connection{peer=Client}:poll:FramedRead::poll_next:FramedRead::decode_frame{offset=39}: h2::codec::framed_read: frame.kind=Settings
+2024-06-28T16:17:43.905195Z TRACE h2::proto::streams::store:  -> first entry
+2024-06-28T16:17:43.905254Z DEBUG Connection{peer=Client}:poll:FramedRead::poll_next: h2::codec::framed_read: received frame=Settings { flags: (0x0), max_concurrent_streams: 2147483647, initial_window_size: 4194304, max_frame_size: 4194304, max_header_list_size: 16384 }
+2024-06-28T16:17:43.905310Z TRACE Connection{peer=Client}:poll: h2::proto::connection: recv SETTINGS frame=Settings { flags: (0x0), max_concurrent_streams: 2147483647, initial_window_size: 4194304, max_frame_size: 4194304, max_header_list_size: 16384 }
+2024-06-28T16:17:43.905355Z TRACE reserve_capacity{stream.id=StreamId(1) requested=1 effective=1 curr=0}:try_assign_capacity{stream.id=StreamId(1)}: h2::proto::streams::prioritize: requested=1 additional=1 buffered=0 window=65535 conn=65535
+2024-06-28T16:17:43.905376Z DEBUG Connection{peer=Client}:poll:poll_ready:FramedWrite::buffer{frame=Settings { flags: (0x1: ACK) }}: h2::codec::framed_write: send frame=Settings { flags: (0x1: ACK) }
+2024-06-28T16:17:43.905406Z TRACE reserve_capacity{stream.id=StreamId(1) requested=1 effective=1 curr=0}:try_assign_capacity{stream.id=StreamId(1)}: h2::proto::streams::prioritize: assigning capacity=1
+2024-06-28T16:17:43.905422Z TRACE Connection{peer=Client}:poll:poll_ready:FramedWrite::buffer{frame=Settings { flags: (0x1: ACK) }}: h2::frame::settings: encoding SETTINGS; len=0
+2024-06-28T16:17:43.905438Z TRACE reserve_capacity{stream.id=StreamId(1) requested=1 effective=1 curr=0}:try_assign_capacity{stream.id=StreamId(1)}: h2::proto::streams::stream:   assigned capacity to stream; available=1; buffered=0; id=StreamId(1); max_buffer_size=1048576 prev=0
+2024-06-28T16:17:43.905647Z TRACE Connection{peer=Client}:poll:poll_ready:FramedWrite::buffer{frame=Settings { flags: (0x1: ACK) }}: h2::codec::framed_write: encoded settings rem=36
+2024-06-28T16:17:43.905671Z TRACE reserve_capacity{stream.id=StreamId(1) requested=1 effective=1 curr=0}:try_assign_capacity{stream.id=StreamId(1)}: h2::proto::streams::stream:   notifying task
+2024-06-28T16:17:43.905704Z TRACE Connection{peer=Client}:poll:poll_ready: h2::proto::settings: ACK sent; applying settings
+2024-06-28T16:17:43.905728Z TRACE reserve_capacity{stream.id=StreamId(1) requested=1 effective=1 curr=0}:try_assign_capacity{stream.id=StreamId(1)}: h2::proto::streams::prioritize: available=1 requested=1 buffered=0 has_unavailable=true
+2024-06-28T16:17:43.905806Z TRACE Connection{peer=Client}:poll:poll_ready:recv_stream_window_update{stream.id=StreamId(1) stream.state=State { inner: Open { local: Streaming, remote: AwaitingHeaders } } inc=4128769 flow=FlowControl { window_size: Window(65535), available: Window(1) }}: h2::proto::streams::flow_control: inc_window; sz=4128769; old=65535; new=4194304
+2024-06-28T16:17:43.905852Z TRACE Connection{peer=Client}:poll:poll_ready:recv_stream_window_update{stream.id=StreamId(1) stream.state=State { inner: Open { local: Streaming, remote: AwaitingHeaders } } inc=4128769 flow=FlowControl { window_size: Window(65535), available: Window(1) }}:try_assign_capacity{stream.id=StreamId(1)}: h2::proto::streams::prioritize: requested=1 additional=0 buffered=0 window=4194304 conn=65534
+2024-06-28T16:17:43.905913Z TRACE Connection{peer=Client}:poll:FramedRead::poll_next: h2::codec::framed_read: poll
+2024-06-28T16:17:43.905938Z TRACE Connection{peer=Client}:poll:FramedRead::poll_next: h2::codec::framed_read: read.bytes=13
+2024-06-28T16:17:43.905990Z TRACE Connection{peer=Client}:poll:FramedRead::poll_next:FramedRead::decode_frame{offset=13}: h2::codec::framed_read: decoding frame from 13B
+2024-06-28T16:17:43.906016Z TRACE Connection{peer=Client}:poll:FramedRead::poll_next:FramedRead::decode_frame{offset=13}: h2::codec::framed_read: frame.kind=WindowUpdate
+2024-06-28T16:17:43.906048Z DEBUG Connection{peer=Client}:poll:FramedRead::poll_next: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(0), size_increment: 4128769 }
+2024-06-28T16:17:43.906079Z TRACE Connection{peer=Client}:poll: h2::proto::connection: recv WINDOW_UPDATE frame=WindowUpdate { stream_id: StreamId(0), size_increment: 4128769 }
+2024-06-28T16:17:43.906125Z TRACE Connection{peer=Client}:poll: h2::proto::streams::flow_control: inc_window; sz=4128769; old=65535; new=4194304
+2024-06-28T16:17:43.906170Z TRACE Connection{peer=Client}:poll:FramedRead::poll_next: h2::codec::framed_read: poll
+2024-06-28T16:17:43.906206Z DEBUG Connection{peer=Client}:poll:FramedWrite::buffer{frame=WindowUpdate { stream_id: StreamId(0), size_increment: 5177345 }}: h2::codec::framed_write: send frame=WindowUpdate { stream_id: StreamId(0), size_increment: 5177345 }
+2024-06-28T16:17:43.906231Z TRACE Connection{peer=Client}:poll:FramedWrite::buffer{frame=WindowUpdate { stream_id: StreamId(0), size_increment: 5177345 }}: h2::frame::window_update: encoding WINDOW_UPDATE; id=StreamId(0)
+2024-06-28T16:17:43.906254Z TRACE Connection{peer=Client}:poll:FramedWrite::buffer{frame=WindowUpdate { stream_id: StreamId(0), size_increment: 5177345 }}: h2::codec::framed_write: encoded window_update rem=49
+2024-06-28T16:17:43.906279Z TRACE Connection{peer=Client}:poll: h2::proto::streams::flow_control: inc_window; sz=5177345; old=65535; new=5242880
+2024-06-28T16:17:43.906330Z TRACE Connection{peer=Client}:poll: h2::proto::streams::prioritize: poll_complete
+2024-06-28T16:17:43.906379Z TRACE Connection{peer=Client}:poll: h2::proto::streams::prioritize: schedule_pending_open
+2024-06-28T16:17:43.906398Z TRACE Connection{peer=Client}:poll: h2::proto::streams::prioritize: schedule_pending_open; stream=StreamId(1)
+2024-06-28T16:17:43.906416Z TRACE Connection{peer=Client}:poll: h2::proto::streams::store: Queue::push_front
+2024-06-28T16:17:43.906433Z TRACE Connection{peer=Client}:poll: h2::proto::streams::store:  -> first entry
+2024-06-28T16:17:43.906504Z TRACE Connection{peer=Client}:poll:try_assign_capacity{stream.id=StreamId(1)}: h2::proto::streams::prioritize: requested=1 additional=0 buffered=0 window=4194304 conn=4194303
+2024-06-28T16:17:43.906561Z TRACE Connection{peer=Client}:poll:pop_frame:popped{stream.id=StreamId(1) stream.state=State { inner: Open { local: Streaming, remote: AwaitingHeaders } }}: h2::proto::streams::prioritize: is_pending_reset=false
+2024-06-28T16:17:43.906589Z TRACE Connection{peer=Client}:poll:pop_frame:popped{stream.id=StreamId(1) stream.state=State { inner: Open { local: Streaming, remote: AwaitingHeaders } }}: h2::proto::streams::prioritize: pop_frame; frame=Headers { stream_id: StreamId(1), flags: (0x4: END_HEADERS) }
+2024-06-28T16:17:43.906614Z TRACE Connection{peer=Client}:poll:pop_frame:popped{stream.id=StreamId(1) stream.state=State { inner: Open { local: Streaming, remote: AwaitingHeaders } }}: h2::proto::streams::counts: transition_after; stream=StreamId(1); state=State { inner: Open { local: Streaming, remote: AwaitingHeaders } }; is_closed=false; pending_send_empty=true; buffered_send_data=0; num_recv=0; num_send=1
+2024-06-28T16:17:43.906647Z TRACE Connection{peer=Client}:poll: h2::proto::streams::prioritize: writing frame=Headers { stream_id: StreamId(1), flags: (0x4: END_HEADERS) }
+2024-06-28T16:17:43.906676Z DEBUG Connection{peer=Client}:poll:FramedWrite::buffer{frame=Headers { stream_id: StreamId(1), flags: (0x4: END_HEADERS) }}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1), flags: (0x4: END_HEADERS) }
+2024-06-28T16:17:43.906795Z TRACE Connection{peer=Client}:poll: h2::proto::streams::prioritize: schedule_pending_open
+2024-06-28T16:17:43.906827Z TRACE Connection{peer=Client}:poll:FramedWrite::flush: h2::codec::framed_write: queued_data_frame=false
+2024-06-28T16:17:43.906888Z TRACE Connection{peer=Client}:poll:FramedWrite::flush: h2::codec::framed_write: flushing buffer
+2024-06-28T16:17:43.908362Z TRACE Connection{peer=Client}:poll: h2::proto::connection: connection.state=Open
+2024-06-28T16:17:43.908416Z TRACE Connection{peer=Client}:poll:FramedRead::poll_next: h2::codec::framed_read: poll
+2024-06-28T16:17:43.908445Z TRACE Connection{peer=Client}:poll:FramedRead::poll_next: h2::codec::framed_read: read.bytes=9
+2024-06-28T16:17:43.908476Z TRACE Connection{peer=Client}:poll:FramedRead::poll_next:FramedRead::decode_frame{offset=9}: h2::codec::framed_read: decoding frame from 9B
+2024-06-28T16:17:43.908500Z TRACE Connection{peer=Client}:poll:FramedRead::poll_next:FramedRead::decode_frame{offset=9}: h2::codec::framed_read: frame.kind=Settings
+2024-06-28T16:17:43.908531Z DEBUG Connection{peer=Client}:poll:FramedRead::poll_next: h2::codec::framed_read: received frame=Settings { flags: (0x1: ACK) }
+2024-06-28T16:17:43.908557Z TRACE Connection{peer=Client}:poll: h2::proto::connection: recv SETTINGS frame=Settings { flags: (0x1: ACK) }
+2024-06-28T16:17:43.908577Z DEBUG Connection{peer=Client}:poll: h2::proto::settings: received settings ACK; applying Settings { flags: (0x0), enable_push: 0, initial_window_size: 2097152, max_frame_size: 16384 }
+2024-06-28T16:17:43.908597Z TRACE Connection{peer=Client}:poll: h2::proto::streams::recv: update_initial_window_size; new=2097152; old=2097152
+2024-06-28T16:17:43.908624Z TRACE Connection{peer=Client}:poll:FramedRead::poll_next: h2::codec::framed_read: poll
+2024-06-28T16:17:43.908657Z TRACE Connection{peer=Client}:poll: h2::proto::streams::prioritize: poll_complete
+2024-06-28T16:17:43.908673Z TRACE Connection{peer=Client}:poll: h2::proto::streams::prioritize: schedule_pending_open
+2024-06-28T16:17:43.908699Z TRACE Connection{peer=Client}:poll:FramedWrite::flush: h2::codec::framed_write: flushing buffer
